@@ -12,6 +12,8 @@
     --border-color: #EEEEEE;
 
     --icon-color: #AFB1B8;
+
+    --timing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ------------------------------------- */
@@ -122,7 +124,7 @@ img {
     line-height: 1.14;
     letter-spacing: 0.02em;
 
-    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1); 
+    transition: color 250ms var(--timing); 
 }
 .navigation-list .current {
     color: var(--accent-text-color);
@@ -145,16 +147,16 @@ img {
     right: 0;
     width: 100%;
     height: 4px;
-    opacity: 0;
 
     background: var(--accent-text-color);
     border-radius: 2px;
+    transform: scale(0);
 
-    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 250ms var(--timing);
 }
 .navigation-list .link:hover::after,
 .navigation-list .link:focus::after {
-    opacity: 1;
+    transform: scale(1);
 }
 .header-contacts {
     display: flex;
@@ -172,7 +174,7 @@ img {
     line-height: 1.14;
     letter-spacing: 0.02em;
 
-    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 250ms var(--timing);
 }
 .link-box {
     display: flex;
@@ -239,12 +241,56 @@ img {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
 
-    transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background 250ms var(--timing);
 }
 .first-part .button:hover, .first-part .button:focus {
     background: #188CE8;
 }
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transform: scale(1);
 
+    background-color: rgba(0, 0, 0, 0.2);
+
+    transition: opacity 250ms var(--timing), transform 500ms var(--timing), background-color 250ms var(--timing) 400ms;
+}
+.backdrop.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0);
+    background-color: transparent;
+}
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 528px;
+    min-height: 581px;
+
+    background-color: var(--main-bg-color);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+.modal-buttom {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--main-bg-color);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+}
 /* ---SECOND PART--- */
 
 .benefits-list {
@@ -365,7 +411,7 @@ img {
     background-color: var(--main-bg-color);
     border-radius: 50%;
 
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 250ms var(--timing), fill 250ms var(--timing);
 }
 .wokers-link .link:hover,
 .wokers-link .link:focus {
@@ -391,7 +437,7 @@ img {
     border-radius: 4px;
     fill: var(--icon-color);
 
-    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1), border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: fill 250ms var(--timing), border-color 250ms var(--timing);
 }
 .customer-link:hover, .customer-link:focus {
     fill: var(--accent-text-color);
@@ -440,7 +486,7 @@ footer .logo.link {
 .footer-contacts .contact{
     color: rgba(255, 255, 255, 0.6);
 
-    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 250ms var(--timing);
 }
 .footer-contacts .contact:hover, 
 .footer-contacts .contact:focus {
@@ -470,7 +516,7 @@ footer .logo.link {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
 
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 250ms var(--timing);
 }
 .icons-list .link:hover,
 .icons-list .link:focus {
@@ -507,7 +553,7 @@ footer .logo.link {
     border: none;
     border-radius: 4px;
 
-    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1), background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 250ms var(--timing), background-color 250ms var(--timing), box-shadow 250ms var(--timing);
 }
 .portfolio-buttons .button:hover,
 .portfolio-buttons .button:focus {
@@ -569,7 +615,7 @@ footer .logo.link {
     background-color: rgba(33, 150, 243, 0.9);
 
     transform: translateY(101%);
-    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 250ms var(--timing);
 }
 .overlay .text {
     width: 322px;
